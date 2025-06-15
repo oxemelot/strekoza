@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  php:
+    build:
+      context: ./docker/php
+      args:
+        APP_UID: ${APP_UID}
+        APP_GID: ${APP_GID}
+        APP_ENV: ${APP_ENV}
+        XDEBUG_PORT: ${XDEBUG_PORT}
+    environment:
+      APP_ENV: ${APP_ENV}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      PHP_IDE_CONFIG: "serverName=${APP_NAME}"
+    container_name: ${APP_NAME}-php
+    user: "${APP_UID}:${APP_GID}"
+    volumes:
+      - ./yii2:/var/www
+    working_dir: /var/www
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - db
+
+  nginx-frontend:
+    build: ./docker/nginx/frontend
+    container_name: ${APP_NAME}-nginx-frontend
+    ports:
+      - "${NGINX_FRONTEND_PORT}:80"
+    volumes:
+      - ./yii2:/var/www
+      - ./logs/nginx/frontend:/var/log/nginx
+    depends_on:
+      - php
+
+  nginx-backend:
+    build: ./docker/nginx/backend
+    container_name: ${APP_NAME}-nginx-backend
+    ports:
+      - "${NGINX_BACKEND_PORT}:80"
+    volumes:
+      - ./yii2:/var/www
+      - ./logs/nginx/backend:/var/log/nginx
+    depends_on:
+      - php
+
+  nginx-api:
+    build: ./docker/nginx/api
+    container_name: ${APP_NAME}-nginx-api
+    ports:
+      - "${NGINX_API_PORT}:80"
+    volumes:
+      - ./yii2:/var/www
+      - ./logs/nginx/api:/var/log/nginx
+    depends_on:
+      - php
+
+  db:
+    image: postgres:16
+    container_name: ${APP_NAME}-postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql

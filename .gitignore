@@ -1,0 +1,6 @@
+.idea
+/data
+/logs
+/.env
+/docker/postgres/init.sql
+/README.md
