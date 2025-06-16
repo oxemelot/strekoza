@@ -2,5 +2,7 @@
 /data
 /logs
 /.env
-/docker/postgres/init.sql
+/docker/postgres-db/init.sql
+/docker-compose-phpstorm.yml
+/docker-compose-resolved.yml
 /README.md

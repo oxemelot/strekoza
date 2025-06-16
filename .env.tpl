@@ -10,6 +10,7 @@ APP_NAME=myapp
 APP_TITLE=MyApp
 
 # Настройки базы данных
+DB_HOST=postgres-db
 DB_NAME=myapp
 DB_SCHEMA=main
 DB_USER=myapp
