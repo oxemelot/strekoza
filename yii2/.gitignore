@@ -41,3 +41,8 @@ phpunit.phar
 /backend/web/index.php
 /backend/web/index-test.php
 /backend/web/robots.txt
+
+# phpcs
+/phpcs.xml
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
