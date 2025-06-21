@@ -1,21 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace frontend\tests\unit\models;
 
+use Codeception\Test\Unit;
 use frontend\models\ContactForm;
 use yii\mail\MessageInterface;
 
-class ContactFormTest extends \Codeception\Test\Unit
+class ContactFormTest extends Unit
 {
     public function testSendEmail()
     {
         $model = new ContactForm();
 
         $model->attributes = [
-            'name' => 'Tester',
-            'email' => 'tester@example.com',
+            'name'    => 'Tester',
+            'email'   => 'tester@example.com',
             'subject' => 'very important letter subject',
-            'body' => 'body of current message',
+            'body'    => 'body of current message',
         ];
 
         verify($model->sendEmail('admin@example.com'))->notEmpty();

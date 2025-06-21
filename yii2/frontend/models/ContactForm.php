@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace frontend\models;
 
 use Yii;
@@ -15,7 +17,6 @@ class ContactForm extends Model
     public $subject;
     public $body;
     public $verifyCode;
-
 
     /**
      * {@inheritdoc}
@@ -46,6 +47,7 @@ class ContactForm extends Model
      * Sends an email to the specified email address using the information collected by this model.
      *
      * @param string $email the target email address
+     *
      * @return bool whether the email was sent
      */
     public function sendEmail($email)

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace frontend\models;
 
+use common\models\User;
 use Yii;
 use yii\base\Model;
-use common\models\User;
 
 /**
  * Signup form
@@ -14,7 +16,6 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
-
 
     /**
      * {@inheritdoc}
@@ -48,7 +49,7 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
@@ -61,7 +62,9 @@ class SignupForm extends Model
 
     /**
      * Sends confirmation email to user
+     *
      * @param User $user user model to with email should be send
+     *
      * @return bool whether the email was sent
      */
     protected function sendEmail($user)

@@ -1,20 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace frontend\controllers;
 
+use common\models\LoginForm;
+use frontend\models\ContactForm;
+use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResendVerificationEmailForm;
+use frontend\models\ResetPasswordForm;
+use frontend\models\SignupForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
 
 /**
  * Site controller
@@ -29,22 +31,22 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout', 'signup'],
+                'only'  => ['logout', 'signup'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
+                        'allow'   => true,
+                        'roles'   => ['?'],
                     ],
                     [
                         'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'allow'   => true,
+                        'roles'   => ['@'],
                     ],
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::class,
+                'class'   => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -62,7 +64,7 @@ class SiteController extends Controller
                 'class' => \yii\web\ErrorAction::class,
             ],
             'captcha' => [
-                'class' => \yii\captcha\CaptchaAction::class,
+                'class'           => \yii\captcha\CaptchaAction::class,
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
@@ -70,8 +72,6 @@ class SiteController extends Controller
 
     /**
      * Displays homepage.
-     *
-     * @return mixed
      */
     public function actionIndex()
     {
@@ -80,8 +80,6 @@ class SiteController extends Controller
 
     /**
      * Logs in a user.
-     *
-     * @return mixed
      */
     public function actionLogin()
     {
@@ -103,8 +101,6 @@ class SiteController extends Controller
 
     /**
      * Logs out the current user.
-     *
-     * @return mixed
      */
     public function actionLogout()
     {
@@ -115,8 +111,6 @@ class SiteController extends Controller
 
     /**
      * Displays contact page.
-     *
-     * @return mixed
      */
     public function actionContact()
     {
@@ -138,8 +132,6 @@ class SiteController extends Controller
 
     /**
      * Displays about page.
-     *
-     * @return mixed
      */
     public function actionAbout()
     {
@@ -148,8 +140,6 @@ class SiteController extends Controller
 
     /**
      * Signs user up.
-     *
-     * @return mixed
      */
     public function actionSignup()
     {
@@ -166,8 +156,6 @@ class SiteController extends Controller
 
     /**
      * Requests password reset.
-     *
-     * @return mixed
      */
     public function actionRequestPasswordReset()
     {
@@ -191,7 +179,7 @@ class SiteController extends Controller
      * Resets password.
      *
      * @param string $token
-     * @return mixed
+     *
      * @throws BadRequestHttpException
      */
     public function actionResetPassword($token)
@@ -217,7 +205,9 @@ class SiteController extends Controller
      * Verify email address
      *
      * @param string $token
+     *
      * @throws BadRequestHttpException
+     *
      * @return yii\web\Response
      */
     public function actionVerifyEmail($token)
@@ -238,8 +228,6 @@ class SiteController extends Controller
 
     /**
      * Resend verification email
-     *
-     * @return mixed
      */
     public function actionResendVerificationEmail()
     {
@@ -253,7 +241,7 @@ class SiteController extends Controller
         }
 
         return $this->render('resendVerificationEmail', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
 }

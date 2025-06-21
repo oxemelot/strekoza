@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace frontend\tests\functional;
 
 use common\fixtures\UserFixture;
@@ -10,15 +12,17 @@ class VerifyEmailCest
     /**
      * Load fixtures before db transaction begin
      * Called in _before()
+     *
      * @see \Codeception\Module\Yii2::_before()
      * @see \Codeception\Module\Yii2::loadFixtures()
+     *
      * @return array
      */
     public function _fixtures()
     {
         return [
             'user' => [
-                'class' => UserFixture::class,
+                'class'    => UserFixture::class,
                 'dataFile' => codecept_data_dir() . 'user.php',
             ],
         ];
@@ -61,8 +65,8 @@ class VerifyEmailCest
 
         $I->seeRecord('common\models\User', [
            'username' => 'test.test',
-           'email' => 'test@mail.com',
-           'status' => \common\models\User::STATUS_ACTIVE
+           'email'    => 'test@mail.com',
+           'status'   => \common\models\User::STATUS_ACTIVE,
         ]);
     }
 }

@@ -1,11 +1,15 @@
 <?php
 
-/** @var yii\web\View $this */
-/** @var yii\bootstrap5\ActiveForm $form */
-/** @var \common\models\LoginForm $model */
-
-use yii\bootstrap5\Html;
+use common\models\LoginForm;
 use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Html;
+use yii\web\View;
+
+/**
+ * @var View $this
+ * @var ActiveForm $form
+ * @var LoginForm $model
+ */
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;

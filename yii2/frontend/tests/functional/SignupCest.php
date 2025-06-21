@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace frontend\tests\functional;
 
 use frontend\tests\FunctionalTester;
@@ -7,7 +9,6 @@ use frontend\tests\FunctionalTester;
 class SignupCest
 {
     protected $formId = '#form-signup';
-
 
     public function _before(FunctionalTester $I)
     {
@@ -28,11 +29,12 @@ class SignupCest
     public function signupWithWrongEmail(FunctionalTester $I)
     {
         $I->submitForm(
-            $this->formId, [
-            'SignupForm[username]'  => 'tester',
-            'SignupForm[email]'     => 'ttttt',
-            'SignupForm[password]'  => 'tester_password',
-        ]
+            $this->formId,
+            [
+                'SignupForm[username]' => 'tester',
+                'SignupForm[email]'    => 'ttttt',
+                'SignupForm[password]' => 'tester_password',
+            ]
         );
         $I->dontSee('Username cannot be blank.', '.invalid-feedback');
         $I->dontSee('Password cannot be blank.', '.invalid-feedback');
@@ -43,14 +45,14 @@ class SignupCest
     {
         $I->submitForm($this->formId, [
             'SignupForm[username]' => 'tester',
-            'SignupForm[email]' => 'tester.email@example.com',
+            'SignupForm[email]'    => 'tester.email@example.com',
             'SignupForm[password]' => 'tester_password',
         ]);
 
         $I->seeRecord('common\models\User', [
             'username' => 'tester',
-            'email' => 'tester.email@example.com',
-            'status' => \common\models\User::STATUS_INACTIVE
+            'email'    => 'tester.email@example.com',
+            'status'   => \common\models\User::STATUS_INACTIVE,
         ]);
 
         $I->seeEmailIsSent();

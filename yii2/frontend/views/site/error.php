@@ -1,11 +1,14 @@
 <?php
 
-/** @var yii\web\View $this */
-/** @var string $name */
-/** @var string $message */
-/** @var Exception $exception */
-
 use yii\helpers\Html;
+use yii\web\View;
+
+/**
+ * @var View $this
+ * @var Exception $exception
+ * @var string $message
+ * @var string $name
+ */
 
 $this->title = $name;
 ?>

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',

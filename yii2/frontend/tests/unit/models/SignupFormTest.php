@@ -1,25 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace frontend\tests\unit\models;
 
+use Codeception\Test\Unit;
 use common\fixtures\UserFixture;
+use common\models\User;
 use frontend\models\SignupForm;
+use frontend\tests\UnitTester;
 
-class SignupFormTest extends \Codeception\Test\Unit
+class SignupFormTest extends Unit
 {
     /**
-     * @var \frontend\tests\UnitTester
+     * @var UnitTester
      */
     protected $tester;
-
 
     public function _before()
     {
         $this->tester->haveFixtures([
             'user' => [
-                'class' => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php'
-            ]
+                'class'    => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php',
+            ],
         ]);
     }
 
@@ -27,18 +31,18 @@ class SignupFormTest extends \Codeception\Test\Unit
     {
         $model = new SignupForm([
             'username' => 'some_username',
-            'email' => 'some_email@example.com',
+            'email'    => 'some_email@example.com',
             'password' => 'some_password',
         ]);
 
         $user = $model->signup();
         verify($user)->notEmpty();
 
-        /** @var \common\models\User $user */
+        /** @var User $user */
         $user = $this->tester->grabRecord('common\models\User', [
             'username' => 'some_username',
-            'email' => 'some_email@example.com',
-            'status' => \common\models\User::STATUS_INACTIVE
+            'email'    => 'some_email@example.com',
+            'status'   => User::STATUS_INACTIVE,
         ]);
 
         $this->tester->seeEmailIsSent();
@@ -56,7 +60,7 @@ class SignupFormTest extends \Codeception\Test\Unit
     {
         $model = new SignupForm([
             'username' => 'troy.becker',
-            'email' => 'nicolas.dianna@hotmail.com',
+            'email'    => 'nicolas.dianna@hotmail.com',
             'password' => 'some_password',
         ]);
 

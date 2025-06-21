@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * The manifest of files that are local to specific environment.
  * This file returns a list of environments that the application
@@ -30,7 +33,7 @@
  */
 return [
     'Development' => [
-        'path' => 'dev',
+        'path'        => 'dev',
         'setWritable' => [
             'backend/runtime',
             'backend/web/assets',
@@ -49,7 +52,7 @@ return [
         ],
     ],
     'Production' => [
-        'path' => 'prod',
+        'path'        => 'prod',
         'setWritable' => [
             'backend/runtime',
             'backend/web/assets',

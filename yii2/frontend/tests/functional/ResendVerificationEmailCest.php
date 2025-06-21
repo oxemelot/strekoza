@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace frontend\tests\functional;
 
 use common\fixtures\UserFixture;
@@ -9,19 +11,20 @@ class ResendVerificationEmailCest
 {
     protected $formId = '#resend-verification-email-form';
 
-
     /**
      * Load fixtures before db transaction begin
      * Called in _before()
+     *
      * @see \Codeception\Module\Yii2::_before()
      * @see \Codeception\Module\Yii2::loadFixtures()
+     *
      * @return array
      */
     public function _fixtures()
     {
         return [
             'user' => [
-                'class' => UserFixture::class,
+                'class'    => UserFixture::class,
                 'dataFile' => codecept_data_dir() . 'user.php',
             ],
         ];
@@ -35,7 +38,7 @@ class ResendVerificationEmailCest
     protected function formParams($email)
     {
         return [
-            'ResendVerificationEmailForm[email]' => $email
+            'ResendVerificationEmailForm[email]' => $email,
         ];
     }
 
@@ -74,9 +77,9 @@ class ResendVerificationEmailCest
         $I->submitForm($this->formId, $this->formParams('test@mail.com'));
         $I->canSeeEmailIsSent();
         $I->seeRecord('common\models\User', [
-            'email' => 'test@mail.com',
+            'email'    => 'test@mail.com',
             'username' => 'test.test',
-            'status' => \common\models\User::STATUS_INACTIVE
+            'status'   => \common\models\User::STATUS_INACTIVE,
         ]);
         $I->see('Check your email for further instructions.');
     }

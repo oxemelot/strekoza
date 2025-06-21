@@ -1,6 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
 return [
-    'id' => 'app-frontend-tests',
+    'id'         => 'app-frontend-tests',
     'components' => [
         'assetManager' => [
             'basePath' => __DIR__ . '/../web/assets',
@@ -12,7 +15,7 @@ return [
             'cookieValidationKey' => 'test',
         ],
         'mailer' => [
-            'messageClass' => \yii\symfonymailer\Message::class
-        ]
+            'messageClass' => \yii\symfonymailer\Message::class,
+        ],
     ],
 ];

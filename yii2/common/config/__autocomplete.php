@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+use common\models\User;
+use yii\console\Application as ConsoleApplication;
+use yii\rbac\DbManager;
+use yii\web\Application as WebApplication;
+use yii\web\User as WebUser;
+
 /**
  * This class only exists here for IDE (PHPStorm/Netbeans/...) autocompletion.
  * This file is never included anywhere.
@@ -11,23 +19,25 @@
  * }
  * ```
  */
-class Yii {
+class Yii
+{
     /**
-     * @var \yii\web\Application|\yii\console\Application|__Application
+     * @var WebApplication|ConsoleApplication|__Application
      */
     public static $app;
 }
 
 /**
- * @property yii\rbac\DbManager $authManager 
- * @property \yii\web\User|__WebUser $user
- * 
+ * @property DbManager $authManager
+ * @property WebUser|__WebUser $user
  */
-class __Application {
+class __Application
+{
 }
 
 /**
- * @property app\models\User $identity
+ * @property User $identity
  */
-class __WebUser {
+class __WebUser
+{
 }
