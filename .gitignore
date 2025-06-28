@@ -5,4 +5,4 @@
 /docker/postgres-db/init.sql
 /docker-compose-phpstorm.yml
 /docker-compose-resolved.yml
-/README.md
+/README-APP.md

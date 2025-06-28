@@ -5,10 +5,10 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TEMPLATE_FILE="$SCRIPT_DIR/../.env.tpl"
 ENV_FILE="$SCRIPT_DIR/../.env"
-INIT_SQL_TEMPLATE="$SCRIPT_DIR/../docker/postgres/init.sql.tpl"
-INIT_SQL_FILE="$SCRIPT_DIR/../docker/postgres/init.sql"
-README_TEMPLATE="$SCRIPT_DIR/../README.tpl.md"
-README_OUTPUT="$SCRIPT_DIR/../README.md"
+INIT_SQL_TEMPLATE="$SCRIPT_DIR/../docker/postgres-db/init.sql.tpl"
+INIT_SQL_FILE="$SCRIPT_DIR/../docker/postgres-db/init.sql"
+README_TEMPLATE="$SCRIPT_DIR/../README-APP.tpl.md"
+README_OUTPUT="$SCRIPT_DIR/../README-APP.md"
 
 declare -A VALUES
 
@@ -84,7 +84,7 @@ fi
 
 # === Подстановка в README.md ===
 if [ -f "$README_TEMPLATE" ]; then
-  echo "🛠  Обновление $README_OUTPUT по шаблону README.tpl.md"
+  echo "🛠  Обновление $README_OUTPUT по шаблону README-APP.tpl.md"
   cp "$README_TEMPLATE" "$README_OUTPUT"
 
   for key in "${!VALUES[@]}"; do
