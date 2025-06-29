@@ -11,7 +11,7 @@ return [
             'password'  => getenv('DB_PASS'),
             'charset'   => 'utf8',
             'schemaMap' => ['pgsql' => [
-                'class'         => 'yii\db\pgsql\Schema',
+                'class'         => \yii\db\pgsql\Schema::class,
                 'defaultSchema' => getenv('DB_SCHEMA'),
             ]],
         ],

@@ -40,14 +40,16 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
+            'class'                     => \codemix\localeurls\UrlManager::class,
+            'languages'                 => ['en', 'ru'], // поддерживаемые языки
+            'enablePrettyUrl'           => true,
+            'showScriptName'            => false,
+            'enableLanguageDetection'   => true, // определять язык по браузеру
+            'enableLanguagePersistence' => true, // запоминать язык в сессии/куках
+            'rules'                     => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

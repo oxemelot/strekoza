@@ -2,6 +2,7 @@
 
 use backend\assets\AppAsset;
 use common\widgets\Alert;
+use common\widgets\LanguageDropdown;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
@@ -38,7 +39,8 @@ NavBar::begin([
     ],
 ]);
 $menuItems = [
-    ['label' => 'Home', 'url' => ['/site/index']],
+    ['label' => Yii::t('yii', 'Home'), 'url' => ['/site/index']],
+    ['label' => Yii::t('app/parcel', 'Посылки'), 'url' => ['/parcel/index']],
 ];
 if (Yii::$app->user->isGuest) {
     $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
@@ -47,6 +49,7 @@ echo Nav::widget([
     'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
     'items'   => $menuItems,
 ]);
+echo LanguageDropdown::widget();
 if (Yii::$app->user->isGuest) {
     echo Html::tag('div', Html::a('Login', ['/site/login'], ['class' => ['btn btn-link login text-decoration-none']]), ['class' => ['d-flex']]);
 } else {
@@ -74,7 +77,6 @@ NavBar::end();
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
         <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="float-end"><?= Yii::powered() ?></p>
     </div>
 </footer>
 

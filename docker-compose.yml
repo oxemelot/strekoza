@@ -11,6 +11,8 @@ services:
         XDEBUG_PORT: ${XDEBUG_PORT}
     environment:
       APP_ENV: ${APP_ENV}
+      APP_NAME: ${APP_NAME}
+      APP_TITLE: ${APP_TITLE}
       DB_HOST: ${DB_HOST}
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}

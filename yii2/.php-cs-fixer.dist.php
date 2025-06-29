@@ -82,8 +82,11 @@ return (new PhpCsFixer\Config())
 
         // Порядок в PHPDoc
         'phpdoc_trim' => true,
-        'phpdoc_separation' => true,
+        'phpdoc_separation' => false,
         'phpdoc_trim_consecutive_blank_line_separation' => true,
         'phpdoc_order' => true,
+
+        // Замена 'ClassName' на ClassName::class
+        'class_keyword' => true,
     ])
     ->setFinder($finder);

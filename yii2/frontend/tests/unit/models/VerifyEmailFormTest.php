@@ -8,6 +8,7 @@ use Codeception\Test\Unit;
 use common\fixtures\UserFixture;
 use frontend\models\VerifyEmailForm;
 use frontend\tests\UnitTester;
+use yii\base\InvalidArgumentException;
 
 class VerifyEmailFormTest extends Unit
 {
@@ -28,18 +29,18 @@ class VerifyEmailFormTest extends Unit
 
     public function testVerifyWrongToken()
     {
-        $this->tester->expectThrowable('\yii\base\InvalidArgumentException', function () {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function () {
             new VerifyEmailForm('');
         });
 
-        $this->tester->expectThrowable('\yii\base\InvalidArgumentException', function () {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function () {
             new VerifyEmailForm('notexistingtoken_1391882543');
         });
     }
 
     public function testAlreadyActivatedToken()
     {
-        $this->tester->expectThrowable('\yii\base\InvalidArgumentException', function () {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function () {
             new VerifyEmailForm('already_used_token_1548675330');
         });
     }

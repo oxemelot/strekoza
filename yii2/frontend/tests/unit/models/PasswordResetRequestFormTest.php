@@ -10,6 +10,7 @@ use common\models\User;
 use frontend\models\PasswordResetRequestForm;
 use frontend\tests\UnitTester;
 use Yii;
+use yii\mail\MessageInterface;
 
 class PasswordResetRequestFormTest extends Unit
 {
@@ -55,7 +56,7 @@ class PasswordResetRequestFormTest extends Unit
         verify($user->password_reset_token)->notEmpty();
 
         $emailMessage = $this->tester->grabLastSentEmail();
-        verify($emailMessage)->instanceOf('yii\mail\MessageInterface');
+        verify($emailMessage)->instanceOf(MessageInterface::class);
         verify($emailMessage->getTo())->arrayHasKey($model->email);
         verify($emailMessage->getFrom())->arrayHasKey(Yii::$app->params['supportEmail']);
     }

@@ -23,6 +23,8 @@ class m250616_151119_create_user_table extends Migration
             'created_at'           => $this->dateTime()->notNull(),
             'updated_at'           => $this->dateTime(),
         ]);
+
+        $this->addCommentOnTable('{{%user}}', 'Пользователи');
     }
 
     public function safeDown(): void

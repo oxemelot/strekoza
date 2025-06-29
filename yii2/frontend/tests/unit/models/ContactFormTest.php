@@ -28,7 +28,7 @@ class ContactFormTest extends Unit
 
         /** @var MessageInterface  $emailMessage */
         $emailMessage = $this->tester->grabLastSentEmail();
-        verify($emailMessage)->instanceOf('yii\mail\MessageInterface');
+        verify($emailMessage)->instanceOf(MessageInterface::class);
         verify($emailMessage->getTo())->arrayHasKey('admin@example.com');
         verify($emailMessage->getFrom())->arrayHasKey('noreply@example.com');
         verify($emailMessage->getReplyTo())->arrayHasKey('tester@example.com');

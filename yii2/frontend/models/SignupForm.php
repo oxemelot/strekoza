@@ -6,6 +6,7 @@ namespace frontend\models;
 
 use common\models\User;
 use Yii;
+use yii\base\Exception;
 use yii\base\Model;
 
 /**
@@ -20,7 +21,7 @@ class SignupForm extends Model
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             ['username', 'trim'],
@@ -42,9 +43,11 @@ class SignupForm extends Model
     /**
      * Signs user up.
      *
-     * @return bool whether the creating new account was successful and email was sent
+     * @throws Exception
+     * @throws \yii\db\Exception
+     * @return bool|null whether the creating new account was successful and email was sent
      */
-    public function signup()
+    public function signup(): ?bool
     {
         if (!$this->validate()) {
             return null;
@@ -67,7 +70,7 @@ class SignupForm extends Model
      *
      * @return bool whether the email was sent
      */
-    protected function sendEmail($user)
+    protected function sendEmail(User $user): bool
     {
         return Yii::$app
             ->mailer

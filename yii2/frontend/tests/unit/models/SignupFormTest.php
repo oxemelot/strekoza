@@ -9,6 +9,7 @@ use common\fixtures\UserFixture;
 use common\models\User;
 use frontend\models\SignupForm;
 use frontend\tests\UnitTester;
+use yii\mail\MessageInterface;
 
 class SignupFormTest extends Unit
 {
@@ -49,7 +50,7 @@ class SignupFormTest extends Unit
 
         $mail = $this->tester->grabLastSentEmail();
 
-        verify($mail)->instanceOf('yii\mail\MessageInterface');
+        verify($mail)->instanceOf(MessageInterface::class);
         verify($mail->getTo())->arrayHasKey('some_email@example.com');
         verify($mail->getFrom())->arrayHasKey(\Yii::$app->params['supportEmail']);
         verify($mail->getSubject())->equals('Account registration at ' . \Yii::$app->name);

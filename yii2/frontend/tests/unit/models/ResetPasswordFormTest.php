@@ -8,6 +8,7 @@ use Codeception\Test\Unit;
 use common\fixtures\UserFixture;
 use frontend\models\ResetPasswordForm;
 use frontend\tests\UnitTester;
+use yii\base\InvalidArgumentException;
 
 class ResetPasswordFormTest extends Unit
 {
@@ -28,11 +29,11 @@ class ResetPasswordFormTest extends Unit
 
     public function testResetWrongToken()
     {
-        $this->tester->expectThrowable('\yii\base\InvalidArgumentException', function () {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function () {
             new ResetPasswordForm('');
         });
 
-        $this->tester->expectThrowable('\yii\base\InvalidArgumentException', function () {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function () {
             new ResetPasswordForm('notexistingtoken_1391882543');
         });
     }
